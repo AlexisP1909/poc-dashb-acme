@@ -1,8 +1,5 @@
 // Tremor LineChart [v1.0.0]
 /* eslint-disable @typescript-eslint/no-explicit-any */
-
-"use client"
-
 import React from "react"
 import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react"
 import {
