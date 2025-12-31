@@ -3,77 +3,40 @@
 import React from "react"
 
 import { LineChart, TooltipProps } from "@/components/LineChart/LineChart"
-
+import { useRouter } from "next/navigation"
 interface DataItem {
+  id: number
   date: string
-  revenue: number
+  calls: number
 }
-
-const data: DataItem[] = [
-  //array-start
-  {
-    date: "Jan 23",
-    revenue: 2340,
-  },
-  {
-    date: "Feb 23",
-    revenue: 3110,
-  },
-  {
-    date: "Mar 23",
-    revenue: 4643,
-  },
-  {
-    date: "Apr 23",
-    revenue: 4650,
-  },
-  {
-    date: "May 23",
-    revenue: 3980,
-  },
-  {
-    date: "Jun 23",
-    revenue: 4702,
-  },
-  {
-    date: "Jul 23",
-    revenue: 5990,
-  },
-  {
-    date: "Aug 23",
-    revenue: 5700,
-  },
-  {
-    date: "Sep 23",
-    revenue: 4250,
-  },
-  {
-    date: "Oct 23",
-    revenue: 4182,
-  },
-  {
-    date: "Nov 23",
-    revenue: 3812,
-  },
-  {
-    date: "Dec 23",
-    revenue: 4900,
-  },
+const data : DataItem[]= [
+  { "id": 1, "date": "Dec 31, 25", "calls": 9 },
+  { "id": 2, "date": "Jan 1, 26", "calls": 12 },
+  { "id": 3, "date": "Jan 2, 26", "calls": 8 },
+  { "id": 4, "date": "Jan 3, 26", "calls": 11 },
+  { "id": 5, "date": "Jan 4, 26", "calls": 10 }
+];
   //array-end
-]
 
 function LineChartCallback() {
+  const router = useRouter();
   const [datas, setDatas] = React.useState<TooltipProps | null>(null)
-  const currencyFormatter = (number: number) =>
-    `$${Intl.NumberFormat("us").format(number)}`
+  const callsFormatter = (number: number) =>
+    `${Intl.NumberFormat("us").format(number)}`
 
   const payload = datas?.payload?.[0]
   const value = payload?.value ?? 0
 
-  const formattedValue = payload
-    ? currencyFormatter(value)
-    : currencyFormatter(data[data.length - 1].revenue)
 
+
+  const selectedId = datas?.payload?.[0]?.payload.id;
+  const formattedValue = payload
+    ? callsFormatter(value)
+    : callsFormatter(data[data.length - 1].calls)
+  
+  const handleDrillDown = () => {
+   return router.push(`/call/${selectedId}`);
+}
   return (
     <div className="w-[80%]">
       <p className="text-sm text-gray-700 dark:text-gray-300">
@@ -82,10 +45,11 @@ function LineChartCallback() {
       <p className="mt-2 text-xl font-semibold text-gray-900 dark:text-gray-50">
         {formattedValue}
       </p>
+      <div onClick={handleDrillDown}>
       <LineChart
         data={data}
         index="date"
-        categories={["revenue"]}
+        categories={["calls"]}
         showLegend={false}
         showYAxis={false}
         startEndOnly={true}
@@ -102,6 +66,7 @@ function LineChartCallback() {
           return null
         }}
       />
+      </div>
     </div>
   )
 }
