@@ -2,7 +2,7 @@
 
 import React from "react"
 
-import { LineChart, TooltipProps } from "@/components/LineChart/LineChart"
+import { LineChart, TooltipProps } from "@/components/lineCharts/LineChart"
 import { useRouter } from "next/navigation"
 interface DataItem {
   id: number
