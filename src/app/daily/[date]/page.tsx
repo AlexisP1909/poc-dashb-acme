@@ -163,7 +163,7 @@ export default function DailyPage({ params }: { params: { date: string } }) {
 
           {/* Sentiment Breakdown */}
           <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-            <h2 className="text-lg font-semibold text-gray-900 mb-6">Sentiment Breakdown</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-6">User Sentiment Breakdown</h2>
 
             {/* Labels on top */}
             <div className="flex w-full mb-2">
