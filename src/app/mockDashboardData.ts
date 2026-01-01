@@ -45,8 +45,21 @@ export interface DashboardData {
     };
 }
 
+// Simple seeded random number generator (Linear Congruential Generator)
+let seed = 12345;
+const seededRandom = () => {
+    const a = 1664525;
+    const c = 1013904223;
+    const m = 4294967296; // 2^32
+    seed = (a * seed + c) % m;
+    return seed / m;
+};
+
 // Generate 30 days of time series data
 const generateTimeSeriesData = (): DashboardDataPoint[] => {
+    // Reset seed for consistency on re-renders
+    seed = 12345;
+
     const data: DashboardDataPoint[] = [];
     const startDate = new Date('2025-12-02');
 
@@ -55,19 +68,19 @@ const generateTimeSeriesData = (): DashboardDataPoint[] => {
         currentDate.setDate(startDate.getDate() + i);
 
         // Simulate varying call volumes (6-15 calls per day)
-        const calls = Math.floor(Math.random() * 10) + 6;
-        const successfulCalls = Math.floor(calls * (0.6 + Math.random() * 0.3)); // 60-90% success
+        const calls = Math.floor(seededRandom() * 10) + 6;
+        const successfulCalls = Math.floor(calls * (0.6 + seededRandom() * 0.3)); // 60-90% success
         const failedCalls = calls - successfulCalls;
         const successRate = Math.round((successfulCalls / calls) * 100);
 
         // Sentiment: -1 (negative) to 1 (positive), weighted toward positive
-        const avgSentiment = Math.round((Math.random() * 0.8 + 0.1) * 100) / 100;
+        const avgSentiment = Math.round((seededRandom() * 0.8 + 0.1) * 100) / 100;
 
         // Revenue: $1000-$2500 per successful call
-        const totalRevenue = successfulCalls * (Math.floor(Math.random() * 1500) + 1000);
+        const totalRevenue = successfulCalls * (Math.floor(seededRandom() * 1500) + 1000);
 
         // Avg duration: 7-14 minutes
-        const avgCallDuration = Math.floor(Math.random() * 8) + 7;
+        const avgCallDuration = Math.floor(seededRandom() * 8) + 7;
 
         data.push({
             date: currentDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' }),
