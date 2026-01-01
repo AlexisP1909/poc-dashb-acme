@@ -49,7 +49,7 @@ export default function BarChart({
                             borderRadius: '8px',
                             boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1)'
                         }}
-                        formatter={(value: number, name: string, props: any) => {
+                        formatter={(value: any, name: any, props: any) => {
                             if (showPercentage && props.payload.percentage) {
                                 return [`${value} (${props.payload.percentage}%)`, valueLabel];
                             }

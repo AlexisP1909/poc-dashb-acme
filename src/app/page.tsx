@@ -6,6 +6,7 @@ import MetricCard from "@/components/ui/MetricCard";
 import BarChart from "@/components/charts/BarChart";
 import ExportButton from "@/components/ui/ExportButton";
 import MOCK_DASHBOARD_DATA from "@/app/mockDashboardData";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const {
@@ -22,6 +23,11 @@ export default function Home() {
   // Format sentiment as percentage (convert -1 to 1 scale to 0-100%)
   const sentimentPercentage = Math.round(((avgSentiment + 1) / 2) * 100);
 
+  const router = useRouter();
+
+  function goToDayReport() {
+    router.push("/daily/2025-12-31");
+  }
   // Prepare bar chart data
   const failureChartData = failureAnalysis.map(item => ({
     name: item.reason,
@@ -110,7 +116,7 @@ export default function Home() {
           </div>
 
           {/* Enhanced Line Chart */}
-          <div className="mb-8">
+          <div className="mb-8" onClick={goToDayReport}>
             <OverviewLineChart />
           </div>
 
@@ -126,35 +132,7 @@ export default function Home() {
             />
           </div>
 
-          {/* Top Deals Section */}
-          <div className="bg-white rounded-xl border border-gray-200 p-6">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Highest Revenue Deals</h2>
-            <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
-              {topDeals.map((deal, index) => (
-                <div key={index} className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-4 border border-blue-100">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className="text-xs font-semibold text-blue-600">#{index + 1}</span>
-                    <span className="text-xs text-gray-500">{deal.metric}</span>
-                  </div>
-                  <p className="text-sm font-medium text-gray-700 mb-1">{deal.name}</p>
-                  <p className="text-xl font-bold text-gray-900">${deal.value.toLocaleString()}</p>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          {/* Quick Actions */}
-          <div className="mt-8 flex items-center gap-4">
-            <a
-              href="/daily/2025-12-31"
-              className="inline-flex items-center gap-2 px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-lg hover:bg-gray-200 transition-colors duration-200"
-            >
-              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-              </svg>
-              <span>View Today's Calls</span>
-            </a>
-          </div>
         </div>
       </div>
     </div>
