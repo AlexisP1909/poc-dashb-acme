@@ -163,44 +163,44 @@ export default function DailyPage({ params }: { params: { date: string } }) {
 
           {/* Sentiment Breakdown */}
           <div className="bg-white rounded-xl border border-gray-200 p-6 mb-8">
-            <h2 className="text-lg font-semibold text-gray-900 mb-4">Sentiment Breakdown</h2>
-            <div className="flex gap-4">
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">Positive</span>
-                  <span className="text-sm font-semibold text-green-600">{metrics.positive}</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-green-500 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${(metrics.positive / metrics.totalCalls) * 100}%` }}
-                  />
+            <h2 className="text-lg font-semibold text-gray-900 mb-6">Sentiment Breakdown</h2>
+
+            {/* Labels on top */}
+            <div className="flex w-full mb-2">
+              <div style={{ width: `${(metrics.positive / metrics.totalCalls) * 100}%` }} className="flex justify-center">
+                <div className="flex justify-center gap-1">
+                  <span className="text-xs font-semibold text-gray-900 mb-1">Positive</span>
+                  <span className="text-xs text-gray-500">{Math.round((metrics.positive / metrics.totalCalls) * 100)}% ({metrics.positive})</span>
                 </div>
               </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">Neutral</span>
-                  <span className="text-sm font-semibold text-yellow-600">{metrics.neutral}</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-yellow-500 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${(metrics.neutral / metrics.totalCalls) * 100}%` }}
-                  />
+              <div style={{ width: `${(metrics.neutral / metrics.totalCalls) * 100}%` }} className="flex justify-center">
+                <div className="flex justify-center gap-1">
+                  <span className="text-xs font-semibold text-gray-900 mb-1">Neutral</span>
+                  <span className="text-xs text-gray-500">{Math.round((metrics.neutral / metrics.totalCalls) * 100)}% ({metrics.neutral})</span>
                 </div>
               </div>
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-2">
-                  <span className="text-sm font-medium text-gray-700">Negative</span>
-                  <span className="text-sm font-semibold text-red-600">{metrics.negative}</span>
-                </div>
-                <div className="w-full bg-gray-200 rounded-full h-2">
-                  <div
-                    className="bg-red-500 h-2 rounded-full transition-all duration-500"
-                    style={{ width: `${(metrics.negative / metrics.totalCalls) * 100}%` }}
-                  />
+              <div style={{ width: `${(metrics.negative / metrics.totalCalls) * 100}%` }} className="flex justify-center">
+                <div className="flex justify-center gap-1">
+                  <span className="text-xs font-semibold text-gray-900 mb-1">Negative</span>
+                  <span className="text-xs text-gray-500">{Math.round((metrics.negative / metrics.totalCalls) * 100)}% ({metrics.negative})</span>
                 </div>
               </div>
+            </div>
+
+            {/* Stacked Bar */}
+            <div className="w-full h-4 bg-gray-100 rounded-full overflow-hidden flex">
+              <div
+                className="bg-green-500 h-full transition-all duration-500"
+                style={{ width: `${(metrics.positive / metrics.totalCalls) * 100}%` }}
+              />
+              <div
+                className="bg-yellow-500 h-full transition-all duration-500"
+                style={{ width: `${(metrics.neutral / metrics.totalCalls) * 100}%` }}
+              />
+              <div
+                className="bg-red-500 h-full transition-all duration-500"
+                style={{ width: `${(metrics.negative / metrics.totalCalls) * 100}%` }}
+              />
             </div>
           </div>
 
