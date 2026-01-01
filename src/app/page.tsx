@@ -12,7 +12,7 @@ export default function Home() {
   const {
     timeSeriesData,
     failureAnalysis,
-    topDeals,
+
     totalCalls,
     totalSuccessRate,
     avgSentiment,
