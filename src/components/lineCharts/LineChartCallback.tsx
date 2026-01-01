@@ -29,13 +29,12 @@ function LineChartCallback() {
 
 
 
-  const selectedId = datas?.payload?.[0]?.payload.id;
   const formattedValue = payload
     ? callsFormatter(value)
     : callsFormatter(data[data.length - 1].calls)
   
   const handleDrillDown = () => {
-   return router.push(`/call/${selectedId}`);
+   return router.push(`/daily/2025-12-31`);
 }
   return (
     <div className="w-[80%]">

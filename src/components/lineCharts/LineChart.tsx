@@ -390,14 +390,12 @@ const ChartTooltip = ({
       <div
         className={cx(
           // base
-          "rounded-md border text-sm shadow-md",
-          // border color
-          "border-gray-200 dark:border-gray-800",
+          "rounded-md text-sm shadow-md",
           // background color
           "bg-white dark:bg-gray-950",
         )}
       >
-        <div className={cx("border-b border-inherit px-4 py-2")}>
+        <div className={cx(" px-4 py-2")}>
           <p
             className={cx(
               // base
