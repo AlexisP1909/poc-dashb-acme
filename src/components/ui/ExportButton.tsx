@@ -16,8 +16,12 @@ export default function ExportButton({
     const [isExporting, setIsExporting] = React.useState(false);
 
     const convertToCSV = (objArray: any): string => {
+        if (!Array.isArray(objArray) || objArray.length === 0) {
+            return '';
+        }
+
         const array = typeof objArray !== 'object' ? JSON.parse(objArray) : objArray;
-        let str = '';
+        let str = '\uFEFF'; // Add BOM for Excel compatibility
 
         // Get headers
         const headers = Object.keys(array[0]);
@@ -29,7 +33,15 @@ export default function ExportButton({
             for (let index in headers) {
                 if (line !== '') line += ',';
                 const header = headers[index];
-                line += array[i][header];
+                const value = array[i][header];
+
+                // Handle values that might contain commas or newlines
+                let formattedValue = value === null || value === undefined ? '' : String(value);
+                if (formattedValue.includes(',') || formattedValue.includes('\n') || formattedValue.includes('"')) {
+                    formattedValue = `"${formattedValue.replace(/"/g, '""')}"`;
+                }
+
+                line += formattedValue;
             }
             str += line + '\r\n';
         }
@@ -40,6 +52,12 @@ export default function ExportButton({
         setIsExporting(true);
 
         try {
+            if (!data || !Array.isArray(data) || data.length === 0) {
+                console.warn('No data to export');
+                setIsExporting(false);
+                return;
+            }
+
             // Convert data to CSV
             const csv = convertToCSV(data);
 
@@ -55,10 +73,13 @@ export default function ExportButton({
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+
+            // Cleanup
+            setTimeout(() => URL.revokeObjectURL(url), 100);
         } catch (error) {
             console.error('Export failed:', error);
         } finally {
-            setTimeout(() => setIsExporting(false), 1000);
+            setTimeout(() => setIsExporting(false), 500);
         }
     };
 
@@ -66,8 +87,14 @@ export default function ExportButton({
         setIsExporting(true);
 
         try {
+            if (!data) {
+                console.warn('No data to export');
+                setIsExporting(false);
+                return;
+            }
+
             const jsonStr = JSON.stringify(data, null, 2);
-            const blob = new Blob([jsonStr], { type: 'application/json' });
+            const blob = new Blob([jsonStr], { type: 'application/json;charset=utf-8;' });
             const link = document.createElement('a');
             const url = URL.createObjectURL(blob);
 
@@ -78,10 +105,13 @@ export default function ExportButton({
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
+
+            // Cleanup
+            setTimeout(() => URL.revokeObjectURL(url), 100);
         } catch (error) {
             console.error('Export failed:', error);
         } finally {
-            setTimeout(() => setIsExporting(false), 1000);
+            setTimeout(() => setIsExporting(false), 500);
         }
     };
 
