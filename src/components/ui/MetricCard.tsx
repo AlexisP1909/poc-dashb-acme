@@ -42,8 +42,8 @@ export default function MetricCard({
                         )}
                     </div>
                     {icon && (
-                        <div className={`p-3 rounded-lg bg-gradient-to-br ${gradient} opacity-10 group-hover:opacity-20 transition-opacity duration-300`}>
-                            <div className="text-gray-700">
+                        <div className={`p-3 rounded-lg bg-gradient-to-br ${gradient} opacity-30 group-hover:opacity-50 transition-opacity duration-300`}>
+                            <div className="text-black ">
                                 {icon}
                             </div>
                         </div>
