@@ -72,8 +72,13 @@ export default function DailyPage({ params }: { params: { date: string } }) {
         <Sidebar />
         <div className="pl-60 pt-10 pr-10">
           <div className="max-w-7xl mx-auto">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Daily Report</h1>
-            <p className="text-gray-600 mb-8">{params.date}</p>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              {new Date(params.date).toLocaleDateString('en-US', {
+                month: 'long',
+                day: 'numeric',
+                year: 'numeric'
+              })} Report
+            </h1>
             <div className="bg-white rounded-xl border border-gray-200 p-12 text-center">
               <p className="text-gray-500 text-lg">No data available for this date</p>
             </div>
@@ -92,15 +97,14 @@ export default function DailyPage({ params }: { params: { date: string } }) {
         <div className="max-w-7xl mx-auto">
           {/* Header */}
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-gray-900 mb-2">Daily Report</h1>
-            <p className="text-gray-600">
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
               {new Date(params.date).toLocaleDateString('en-US', {
-                weekday: 'long',
-                year: 'numeric',
                 month: 'long',
-                day: 'numeric'
-              })}
-            </p>
+                day: 'numeric',
+                year: 'numeric'
+              })} Report
+            </h1>
+            <p className="text-gray-600">Daily performance metrics and call details</p>
           </div>
 
           {/* Metrics Grid */}
