@@ -3,6 +3,7 @@
 import React from 'react';
 
 interface ExportButtonProps {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     data: any;
     filename?: string;
     className?: string;
@@ -30,7 +31,7 @@ export default function ExportButton({
         // Get data rows
         for (let i = 0; i < array.length; i++) {
             let line = '';
-            for (let index in headers) {
+            for (const index in headers) {
                 if (line !== '') line += ',';
                 const header = headers[index];
                 const value = array[i][header];

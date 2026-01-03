@@ -8,8 +8,7 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    ResponsiveContainer,
-    Area
+    ResponsiveContainer
 } from 'recharts';
 import { useRouter } from 'next/navigation';
 import MOCK_DASHBOARD_DATA from '@/app/mockDashboardData';
@@ -25,6 +24,7 @@ export default function OverviewLineChart() {
         revenueK: day.totalRevenue / 1000
     }));
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const CustomTooltip = ({ active, payload, label }: any) => {
         if (active && payload && payload.length) {
             const pointData = payload[0].payload;
@@ -48,7 +48,7 @@ export default function OverviewLineChart() {
                             <span className="text-xs font-medium text-gray-600">Sentiment</span>
                             <div className="flex items-center gap-1">
                                 <span className={`w-2 h-2 rounded-full ${pointData.avgSentiment > 0.5 ? 'bg-green-500' :
-                                        pointData.avgSentiment > 0 ? 'bg-yellow-500' : 'bg-red-500'
+                                    pointData.avgSentiment > 0 ? 'bg-yellow-500' : 'bg-red-500'
                                     }`} />
                                 <span className="text-sm font-bold text-gray-700">
                                     {Math.round(((pointData.avgSentiment + 1) / 2) * 100)}%
@@ -67,6 +67,7 @@ export default function OverviewLineChart() {
         return null;
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handlePointClick = (data: any) => {
         if (data && data.activePayload && data.activePayload.length > 0) {
             const pointData = data.activePayload[0].payload;

@@ -1,4 +1,4 @@
-import { DailyCallData } from "../interface/types";
+
 
 // Mock data for dashboard overview - 30 days of data
 // Each day contains aggregated metrics and detailed call information
