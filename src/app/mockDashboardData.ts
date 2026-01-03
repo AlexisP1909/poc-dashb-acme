@@ -129,8 +129,8 @@ const revenueChange = Math.round(((lastWeekRevenue - prevWeekRevenue) / prevWeek
 const failureAnalysis: FailureReason[] = [
     {
         reason: "Price Negotiation Failed",
-        count: 42,
-        percentage: 58,
+        count: 50,
+        percentage: 69,
         color: "#ef4444" // red-500
     },
     {
@@ -138,12 +138,6 @@ const failureAnalysis: FailureReason[] = [
         count: 18,
         percentage: 25,
         color: "#f59e0b" // amber-500
-    },
-    {
-        reason: "Carrier Unavailable",
-        count: 8,
-        percentage: 11,
-        color: "#6366f1" // indigo-500
     },
     {
         reason: "Other Reasons",
