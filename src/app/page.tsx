@@ -87,9 +87,9 @@ export default function Home() {
             />
 
             <MetricCard
-              title="Avg Sentiment"
+              title="Positive Sentiment Rate"
               value={`${sentimentPercentage}%`}
-              subtitle="Client satisfaction"
+              subtitle="Positive Sentiment"
               gradient="from-purple-500 to-pink-600"
               icon={
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
