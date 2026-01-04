@@ -7,7 +7,7 @@ import ExportButton from '@/components/ui/ExportButton';
 
 const MOCK_DAILY_DATA_TYPED: DailyCallData = MOCK_DAILY_DATA;
 
-export function getDataForDate(date: string): DailyCallData | undefined {
+function getDataForDate(date: string): DailyCallData | undefined {
   // Since this is mock data for 2025-12-31, return it only for that date
   if (date === "2025-12-31") {
     return MOCK_DAILY_DATA_TYPED;
