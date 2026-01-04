@@ -16,6 +16,7 @@ export default function ExportButton({
 }: ExportButtonProps) {
     const [isExporting, setIsExporting] = React.useState(false);
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const convertToCSV = (objArray: any): string => {
         if (!Array.isArray(objArray) || objArray.length === 0) {
             return '';
