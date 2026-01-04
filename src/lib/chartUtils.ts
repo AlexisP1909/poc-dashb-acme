@@ -1,5 +1,12 @@
 // Color definitions
-const colorMap = {
+interface ColorClassNames {
+    bg: string;
+    stroke: string;
+    fill: string;
+    text: string;
+}
+
+const colorMap: Record<string, ColorClassNames> = {
     slate: {
         bg: "bg-slate-500",
         stroke: "stroke-slate-500",
@@ -157,8 +164,8 @@ export const getColorClassName = (
 ): string => {
     const fallback = colorMap.blue;
     return (
-        (colorMap[color] as any)?.[type] ??
-        (fallback as any)[type] ??
+        colorMap[color]?.[type as keyof ColorClassNames] ??
+        fallback[type as keyof ColorClassNames] ??
         ""
     );
 };
@@ -174,7 +181,7 @@ export const getYAxisDomain = (
 };
 
 export const hasOnlyOneValueForKey = (
-    data: any[],
+    data: Record<string, unknown>[],
     key: string,
 ): boolean => {
     if (!Array.isArray(data) || data.length === 0) return false;
